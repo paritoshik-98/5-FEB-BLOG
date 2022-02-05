@@ -1,0 +1,85 @@
+D:\BLOG>git init
+Initialized empty Git repository in D:/BLOG/.git/
+
+D:\BLOG>git add -A
+warning: LF will be replaced by CRLF in frontend/README.md.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in frontend/package-lock.json.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in frontend/package.json.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in frontend/public/index.html.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in frontend/public/manifest.json.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in frontend/public/robots.txt.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in frontend/src/App.css.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in frontend/src/App.js.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in frontend/src/App.test.js.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in frontend/src/index.css.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in frontend/src/index.js.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in frontend/src/reportWebVitals.js.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in frontend/src/setupTests.js.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in package-lock.json.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in package.json.
+The file will have its original line endings in your working directory
+
+D:\BLOG>git commit -m "first commit"
+[master (root-commit) 77df206] first commit
+ 30 files changed, 14520 insertions(+)
+ create mode 100644 .env
+ create mode 100644 .gitignore
+ create mode 100644 controllers/blogController.js
+ create mode 100644 controllers/userController.js
+ create mode 100644 frontend/.gitignore
+ create mode 100644 frontend/README.md
+ create mode 100644 frontend/package-lock.json
+ create mode 100644 frontend/package.json
+ create mode 100644 frontend/public/favicon.ico
+ create mode 100644 frontend/public/index.html
+ create mode 100644 frontend/public/logo192.png
+ create mode 100644 frontend/public/logo512.png
+ create mode 100644 frontend/public/manifest.json
+ create mode 100644 frontend/public/robots.txt
+ create mode 100644 frontend/src/App.css
+ create mode 100644 frontend/src/App.js
+ create mode 100644 frontend/src/App.test.js
+ create mode 100644 frontend/src/index.css
+ create mode 100644 frontend/src/index.js
+ create mode 100644 frontend/src/logo.svg
+ create mode 100644 frontend/src/reportWebVitals.js
+ create mode 100644 frontend/src/setupTests.js
+ create mode 100644 models/blog.js
+ create mode 100644 models/user.js
+ create mode 100644 package-lock.json
+ create mode 100644 package.json
+ create mode 100644 routes/authMiddleware.js
+ create mode 100644 routes/blogRoutes.js
+ create mode 100644 routes/userRoutes.js
+ create mode 100644 server.js
+
+D:\BLOG>git checkout -b backend
+Switched to a new branch 'backend'
+
+D:\BLOG>git remote add origin https://github.com/paritoshik-98/5-FEB-BLOG.git
+
+D:\BLOG>git push -u origin backend
+Enumerating objects: 38, done.
+Counting objects: 100% (38/38), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (35/35), done.
+Writing objects: 100% (38/38), 172.21 KiB | 6.62 MiB/s, done.
+Total 38 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), done.
+To https://github.com/paritoshik-98/5-FEB-BLOG.git
+ * [new branch]      backend -> backend
+Branch 'backend' set up to track remote branch 'backend' from 'origin'.
