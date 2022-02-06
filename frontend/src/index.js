@@ -6,6 +6,10 @@ import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux'
 import store from './REDUX/store';
 import { BrowserRouter as Router, Routes, Route, Link , useNavigate} from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import $ from 'jquery';
+import Popper from 'popper.js';
 
 ReactDOM.render(
     <Router>

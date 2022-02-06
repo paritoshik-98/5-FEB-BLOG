@@ -36,18 +36,26 @@ function Signup(){
     }
 
         return(
-            (regStatus.loading)?<TailSpin color="#00BFFF" height={80} width={80} />
-            :(regStatus.error)?<h1>{regStatus.error}</h1>:(regStatus.success)?<h1>user registered successfully</h1>:
+            // process running 
+            (regStatus.loading)?
+            <TailSpin color="#00BFFF" height={80} width={80} />
+            :
+            // before submitting or after process failed --- no loading atrr 
             <div>
-               <input 
-            type="text" 
+
+            {(regStatus.error)?<div class="alert alert-danger">
+            <strong>{regStatus.error}</strong> 
+            </div>:null}
+
+            <input 
+            type="string" 
             name="name" 
             onChange={inputsHandler} 
-            placeholder="Name" 
+            placeholder="name" 
             value={inputField.name}/>
     
             <br/>
-    
+
             <input 
             type="email" 
             name="email" 
@@ -66,8 +74,9 @@ function Signup(){
     
             <br/>
     
-            <button onClick={submitButton}>Submit Now</button>
+            <button onClick={submitButton}>Register</button>
             </div>
+            
             
             
         )

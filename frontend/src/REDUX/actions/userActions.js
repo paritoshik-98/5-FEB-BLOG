@@ -2,6 +2,19 @@ import axios from "axios";
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = "http://localhost:8080"
 
+// axios.defaults.headers.common['authtoken'] = localStorage.getItem('at')
+// axios.defaults.headers.post['Content-Type'] = 'application/json';
+
+// axios.interceptors.response.use(function (response) {
+//   return response;
+// }, function (error) {
+//   if (401 === error.response.status) {
+//           window.location = '/login';
+//           return Promise.reject(error);
+//       }
+//     } 
+//   );
+
 export const signup = (name,email,password) => async(dispatch) => {
   try {
     const input = {name:name,email:email,password:password}
@@ -15,18 +28,7 @@ export const signup = (name,email,password) => async(dispatch) => {
           dispatch({type: 'USER_REGISTER_FAIL',payload:error.message});
     }
   }
-// axios.defaults.headers.common['authtoken'] = getState.at
-// axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-// axios.interceptors.response.use(function (response) {
-//   return response;
-// }, function (error) {
-//   if (401 === error.response.status) {
-//           window.location = '/login';
-//           return Promise.reject(error);
-//       }
-//     } 
-//   );
 
 export const login = (email, password) => async (dispatch) => {
   try {

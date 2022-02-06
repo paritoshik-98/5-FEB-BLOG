@@ -35,10 +35,17 @@ function Login(){
     }
 
         return(
-            (LoginStatus.loading)?<TailSpin color="#00BFFF" height={80} width={80} />
-            :(LoginStatus.error)?<h1>{LoginStatus.error}</h1>:(LoginStatus.success)?<h1>Login successfull</h1>:
+            // process running 
+            (LoginStatus.loading)?
+            <TailSpin color="#00BFFF" height={80} width={80} />
+            :
+            // before submitting or after process failed --- no loading atrr 
             <div>
-    
+
+            {(LoginStatus.error)?<div class="alert alert-danger">
+            <strong>{LoginStatus.error}</strong> Indicates a dangerous or potentially negative action.
+            </div>:null}
+
             <input 
             type="email" 
             name="email" 
