@@ -55,4 +55,36 @@ router.delete('/:id/delete',authuser,async(req,res)=>{
       });
 })
 
+///////////////////////// cloudinary multer
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("cloudinary").v2;
+cloudinary.config({
+  cloud_name: process.env.cloud_name,
+  api_key: process.env.api_key,
+  api_secret: process.env.api_secret,
+});
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "BLOG",
+  },
+});
+///////////////////////////////////////////multer image handling////////////////
+var multer = require('multer');
+
+var upload = multer({ storage: storage });
+
+/// rouute /api/blog/image_upload
+router.post('/image_upload', authuser,upload.single('upload'),(req,res)=>{
+  try{
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    console.log(req.file.path)
+    res.json({url:req.file.path})
+  }
+  catch{
+    res.json({error:'error'})
+  }
+    })
+
+
 module.exports = router

@@ -1,0 +1,18 @@
+server
+multer req,res = res.header access control al o , "localhost"
+
+----
+add plugin
+https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/installing-plugins.html
+
+add simpleupload adapter plugin
+https://ckeditor.com/docs/ckeditor5/latest/features/image-upload/simple-upload-adapter.html
+
+app || mkdir gitclone -addpluginurl 
+
+npm run build
+
+copy path  (ck5-classic build)
+ -> cd frontend npm i ( path )
+-> import classic editor from {path}] -- /*auto import 
+ {[----------- copy mkdir -> app folder)}

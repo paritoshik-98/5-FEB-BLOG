@@ -5,18 +5,20 @@ const authuser = async(req,res,next) => {
     
     if(at){
         try {
-            const {userid,username} = jwt.verify(at,process.env.JWT_SECRET)
-            console.log(userid,username)
+            const {userid,name} = jwt.verify(at,process.env.JWT_SECRET)
+            console.log(userid,name)
             req.userid = userid
-            req.username = username
+            req.name = name
             next()
         } catch (error) {
-           res.send(401)
+           res.status(401)
+           throw new error('unauthorized')
         }
         
     }
     else{
-        res.send(401)
+        res.status(401)
+           throw new error('unauthorized')
     }
 }
 
