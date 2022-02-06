@@ -1,8 +1,9 @@
 import React, { useEffect,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { login } from "../REDUX/actions/userActions";
+import { login, LoginWithGoogle } from "../REDUX/actions/userActions";
 import { TailSpin } from  'react-loader-spinner'
+import { GoogleLogin, GoogleLogout } from "react-google-login";
 
 function Login(){
 
@@ -33,6 +34,21 @@ function Login(){
         e.preventDefault()  
         dispatch(login(inputField.email,inputField.password))
     }
+
+    const responseGoogleSuccess = (response) => {
+        let userInfo = {
+          name: response.profileObj.name,
+          emailId: response.profileObj.email,
+          profile_pic:response.profileObj.imageUrl
+        };
+        // check in backend and register if first google login 
+        dispatch(LoginWithGoogle({email:userInfo.emailId,name:userInfo.name,profile_pic:userInfo.profile_pic}))
+      };
+
+    // Error Handler
+    const responseGoogleError = (response) => {
+    console.log(response);
+     };
 
         return(
             // process running 
@@ -65,6 +81,18 @@ function Login(){
             <br/>
     
             <button onClick={submitButton}>LOGIN</button>
+
+            <br/>
+
+            <GoogleLogin
+                clientId= {process.env.REACT_APP_CLIENTID_GOOGLE}
+            //   clientId="149517402118-58t2a5ao3f8kqo9vn8bh5muf3ctbl5f3.apps.googleusercontent.com"
+              buttonText="Sign In with Google"
+              onSuccess={responseGoogleSuccess}
+              onFailure={responseGoogleError}
+            //   isSignedIn={true}
+              cookiePolicy={"single_host_origin"}
+            />
             </div>
             
             

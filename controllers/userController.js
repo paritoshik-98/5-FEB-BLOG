@@ -46,7 +46,7 @@ const loginUser = async(req,res,next)=>{
         next()
     }
     else{
-        res.status(401).send('incorrect password')
+        res.status(403).send('incorrect password')
     }
     }
     else{
@@ -56,7 +56,7 @@ const loginUser = async(req,res,next)=>{
 
 // Googlelogin 
 const loginUserGoogle = async(req,res,next)=>{
-    const{email,name}=req.body
+    const{email}=req.body
     const user = await User.findOne({email:email})
     if(user)
     {
@@ -66,7 +66,7 @@ const loginUserGoogle = async(req,res,next)=>{
         req.profile_pic = user.profile_pic;
         next()
     }
-    // register since first login
+    // register if first login
     else{
         const {name,email,profile_pic} = req.body;
     const password = 'default'
@@ -101,23 +101,30 @@ const genToken = async(req,res) => {
 
 // update profile_pic
 const updatePic = (req,res)=>{
-const {id,url} = req.body
+    const id = req.userid // from auth user middleware
+const {url} = req.body
 console.log(id,url)
 User.findOneAndUpdate({_id:id}, {profile_pic:url}, {new: true}, (err, doc) => {
     if (err) {
-        res.status(500)
-        throw new Error('something went wrong when updating data! ')
+        res.status(500).send('something went wrong when updating profile_pic!')
     }
 
-    res.json({id:'u'})
+    res.send(doc)
 });
 }
 
 
-// update password
-// const updatePassword = (req,res)=>{
-//     const userid = req.userid
-//     const token = jwt.sign({id:userid},process.env.JWT_SECRET,{expiresIn:'10m'})
-//     // send password from nodemailer to useremail
-// }
-module.exports = {addUser,loginUser,genToken,loginUserGoogle,updatePic}
+//update password
+const updatePassword = async(req,res)=>{
+        const id = req.userid
+        bcrypt.hash(req.body.newPswd, saltRounds, async function(err, hash) {
+        User.findOneAndUpdate({_id:id},{password:hash},{new: true}, (err, doc) =>{
+            if (err) {
+                res.status(500).send('something went wrong when updating password!')
+            }
+            res.send(doc)
+        })
+        })
+    }
+
+module.exports = {addUser,loginUser,genToken,loginUserGoogle,updatePic,updatePassword}

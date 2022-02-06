@@ -1,4 +1,4 @@
-const { addUser, loginUser, genToken, loginUserGoogle, updatePic } = require("../controllers/userController");
+const { addUser, loginUser, genToken, loginUserGoogle, updatePic, updatePassword } = require("../controllers/userController");
 const authuser = require('./authMiddleware')
 const express = require('express');
 const user = require("../models/user");
@@ -18,15 +18,17 @@ router.post('/Googlelogin',loginUserGoogle,genToken)
 router.post('/updatePic',authuser,updatePic)
 
 // update password
-//nodemailer-send token
-router.post('/set_password',authuser,async(req,res)=>{
-    const id = req.userid
-    bcrypt.hash(req.body.newPswd, saltRounds, async function(err, hash) {
-    user.findOneAndUpdate({_id:id},{password:hash},{new: true}, (err, doc) =>{
-        res.send('password updated')
-    })
-    })
-})
+router.post('/updatePassword',authuser,updatePassword)
+    
+
+// router.post('/set_password',authuser,async(req,res)=>{
+//     const id = req.userid
+//     bcrypt.hash(req.body.newPswd, saltRounds, async function(err, hash) {
+//     user.findOneAndUpdate({_id:id},{password:hash},{new: true}, (err, doc) =>{
+//         res.send('password updated')
+//     })
+//     })
+// })
 
 router.get('/home',authuser,(req,res)=>res.send('hello'))
 
