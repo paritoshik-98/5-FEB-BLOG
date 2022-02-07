@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const blog = require('../models/blog');
 const authuser = require('./authMiddleware');
-
 // get all blogs = /api/blog/all
 router.get('/all',authuser,async(req,res)=> {
   try {
@@ -31,7 +30,7 @@ router.post('/add',authuser,async(req,res)=>{
   try {
     const {content}=req.body
     if(!content){res.send('blog cannot be blank')}
-    const author = req.username
+    const author = req.name
     console.log(author)
     const doc = new blog({
         content:content,
@@ -40,6 +39,7 @@ router.post('/add',authuser,async(req,res)=>{
     await doc.save()
     res.send('submitted')
   } catch (error) {
+    console.log(error)
     res.status(403).send('Something went wrong !')
   }
     
@@ -48,7 +48,7 @@ router.post('/add',authuser,async(req,res)=>{
 // get user blogs
 router.get('/myBlogs',authuser,async(req,res)=>{
   try {
-    const user = req.username
+    const user = req.name
         const doc = await blog.find({author:user})
         res.send(doc)
   } catch (error) {
@@ -64,7 +64,7 @@ router.put('/:id/edit',authuser,async(req,res)=>{
     if(!content){res.send('blog cannot be blank')}
     const id = req.params.id
     const filter = {_id:req.params.id};
-    const update = {content:content,author:req.username,date:Date.now()};
+    const update = {content:content,author:req.name,date:Date.now()};
     await blog.findOneAndUpdate(filter, update, {
         new: true
       }).then(res.send('blog edited'))  
@@ -110,7 +110,8 @@ var multer = require('multer');
 var upload = multer({ storage: storage });
 
 /// rouute /api/blog/image_upload
-router.post('/image_upload', authuser,upload.single('upload'),(req,res)=>{
+router.post('/image_upload',upload.single('upload'),(req,res)=>{
+  console.log('inside image upload')
   try{
     res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
     console.log(req.file.path)

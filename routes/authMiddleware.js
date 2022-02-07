@@ -11,14 +11,13 @@ const authuser = async(req,res,next) => {
             req.name = name
             next()
         } catch (error) {
-           res.status(401)
-           throw new error('unauthorized')
+            console.log(error)
+           res.status(401).send('unauthorized')
         }
         
     }
     else{
-        res.status(401)
-           throw new error('unauthorized')
+        res.status(401).send('unauthorized no token')
     }
 }
 

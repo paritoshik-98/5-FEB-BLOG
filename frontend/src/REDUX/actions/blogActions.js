@@ -1,9 +1,8 @@
 import axios from "axios";
-import res from "express/lib/response";
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = "http://localhost:8080"
 
-axios.defaults.headers.common['authtoken'] = localStorage.getItem('at')
+// axios.defaults.headers.common['authtoken'] = localStorage.getItem('at')
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 axios.interceptors.response.use(function (response) {
@@ -16,11 +15,20 @@ axios.interceptors.response.use(function (response) {
     } 
   );
 
-export const createBlogAction = (content) => async (dispatch) => {
+export const createBlogAction = (content) => async (dispatch,getState) => {
   try {
-    
+    const {
+      userLogin: { userInfo, at },
+    } = getState();
+
     dispatch({ type: 'BLOG_CREATE_REQUEST' });
-    axios.post("/api/blog/add", content)
+    axios.post("/api/blog/add", {content:content}
+    ,{
+      headers:{
+        authtoken: at
+      }
+    }
+    )
     .then(dispatch({ type: 'BLOG_CREATE_SUCCESS'}))
     .catch(err=>dispatch({type: 'BLOG_CREATE_FAIL',payload:err.response.data}))
     
@@ -31,12 +39,21 @@ export const createBlogAction = (content) => async (dispatch) => {
   }
 
   // send blog id in dispatch request
-export const updateBlogAction = (content,id) => async (dispatch) => {
+export const updateBlogAction = (content,id) => async (dispatch,getState) => {
   try {
-    
+    const {
+      userLogin: { userInfo, at },
+    } = getState();
+
     dispatch({ type: 'BLOG_UPDATE_REQUEST' });
     const path = "/api/blog/"+id+"/edit"
-    axios.put(path, content)
+    axios.put(path, content
+      ,{
+        headers:{
+          authtoken: at
+        }
+      }
+      )
     .then(dispatch({ type: 'BLOG_UPDATE_SUCCESS'}))
     .catch(err=>dispatch({type: 'BLOG_UPDATE_FAIL',payload:err.response.data}))
     
@@ -48,12 +65,21 @@ export const updateBlogAction = (content,id) => async (dispatch) => {
 
 
 // delete
-export const deleteBlogAction = (id) => async (dispatch) => {
+export const deleteBlogAction = (id) => async (dispatch,getState) => {
   try {
+    const {
+      userLogin: { userInfo, at },
+    } = getState();
     
     dispatch({ type: 'BLOG_DELETE_REQUEST' });
     const path = "/api/blog/"+id+"/delete"
-    axios.delete(path)
+    axios.delete(path
+      ,{
+        headers:{
+          authtoken: at
+        }
+      }
+      )
     .then(dispatch({ type: 'BLOG_DELETE_SUCCESS'}))
     .catch(err=>dispatch({type: 'BLOG_DELETE_FAIL',payload:err.response.data}))
     
@@ -66,11 +92,20 @@ export const deleteBlogAction = (id) => async (dispatch) => {
 
 
  // get all blogs 
-  export const allBlogAction = () => async (dispatch) => {
+  export const allBlogAction = () => async (dispatch,getState) => {
     try {
+      const {
+        userLogin: { userInfo, at },
+      } = getState();
       
       dispatch({ type: 'ALL_BLOG_REQUEST' });
-      axios.get("/api/blog/all")
+      axios.get("/api/blog/all"
+      ,{
+        headers:{
+          authtoken: at
+        }
+      }
+      )
       .then(res=>dispatch({ type: 'ALL_BLOG_SUCCESS', payload:res.data}))
       .catch(err=>dispatch({type: 'ALL_BLOG_FAIL',payload:err.response.data}))
       
@@ -81,12 +116,21 @@ export const deleteBlogAction = (id) => async (dispatch) => {
     }
   
 // get 1 blog by id
-export const blogReadAction = (id) => async (dispatch) => {
+export const blogReadAction = (id) => async (dispatch,getState) => {
   try {
+    const {
+      userLogin: { userInfo, at },
+    } = getState();
     
     dispatch({ type: 'BLOG_READ_REQUEST' });
     const path = '/api/blog/'+id
-    axios.get(path)
+    axios.get(path
+      ,{
+        headers:{
+          authtoken: at
+        }
+      }
+      )
     .then(res=>dispatch({ type: 'BLOG_READ_SUCCESS', payload:res.data}))
     .catch(err=>dispatch({type: 'BLOG_READ_FAIL',payload:err.response.data}))
     

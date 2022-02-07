@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Login from './Components/Login';
 import Signup from './Components/Signup';
+import CreateBlog from './Components/CreateBlog';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
 <Route exact path = '/login' element = {<Login/>}></Route>
 <Route exact path = '/signup' element = {<Signup/>}></Route>
 <Route exact path = '/dashboard' element = {<Dashboard/>}></Route>
+<Route exact path = '/add' element = {<CreateBlog/>}></Route>
 {/* read 1 blog */}
 {/* <Route exact path = '/blog/:id' element = {<ReadBlog/>}></Route> */}
 {/* edit blog */}

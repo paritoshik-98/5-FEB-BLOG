@@ -7,6 +7,7 @@
     "@ckeditor/ckeditor5-build-classic": "file:../../THEBOARD-CKEDITOR/ckeditor5/packages/ckeditor5-build-classic",
     "@ckeditor/ckeditor5-react": "^3.0.3",
     "@ckeditor/ckeditor5-upload": "^32.0.0",
+    "@paritoshik_kharad/ckeditor5-build-classic-custom": "file:../../THEBOARD-CKEDITOR/ckeditor5/packages/ckeditor5-build-classic",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
