@@ -14,6 +14,18 @@ router.get('/all',authuser,async(req,res)=> {
   });
 
                                                  // CRUD //
+// get 1 blogs = /api/blog/:id
+router.get('/:id',async(req,res)=>{
+  try {
+    const id = req.params.id
+    const doc =  await blog.findOne({_id:id});
+    res.send(doc);
+  } catch (error) {
+    res.status(403).send('Something went wrong !')
+  }
+  
+})
+
 // --- add new article 'CREATE' 
 router.post('/add',authuser,async(req,res)=>{
   try {

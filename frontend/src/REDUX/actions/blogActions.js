@@ -1,4 +1,5 @@
 import axios from "axios";
+import res from "express/lib/response";
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = "http://localhost:8080"
 
@@ -64,10 +65,36 @@ export const deleteBlogAction = (id) => async (dispatch) => {
 
 
 
-  //////// add (read) GET  one & GET all (list) blogs//////////////////
-
-
-
+ // get all blogs 
+  export const allBlogAction = () => async (dispatch) => {
+    try {
+      
+      dispatch({ type: 'ALL_BLOG_REQUEST' });
+      axios.get("/api/blog/all")
+      .then(res=>dispatch({ type: 'ALL_BLOG_SUCCESS', payload:res.data}))
+      .catch(err=>dispatch({type: 'ALL_BLOG_FAIL',payload:err.response.data}))
+      
+      }
+    catch (error) {
+            dispatch({type: 'ALL_BLOG_FAIL',payload:error.message});
+      }
+    }
+  
+// get 1 blog by id
+export const blogReadAction = (id) => async (dispatch) => {
+  try {
+    
+    dispatch({ type: 'BLOG_READ_REQUEST' });
+    const path = '/api/blog/'+id
+    axios.get(path)
+    .then(res=>dispatch({ type: 'BLOG_READ_SUCCESS', payload:res.data}))
+    .catch(err=>dispatch({type: 'BLOG_READ_FAIL',payload:err.response.data}))
+    
+    }
+  catch (error) {
+          dispatch({type: 'BLOG_READ_FAIL',payload:error.message});
+    }
+  }
 
 
 

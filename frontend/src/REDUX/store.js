@@ -4,8 +4,9 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import {
   blogCreateReducer,
   blogDeleteReducer,
-  blogListReducer,
   blogUpdateReducer,
+  allBlogReducer,
+  blogReadReducer
 } from "./reducers/blogReducers";
 
 import {
@@ -15,7 +16,8 @@ import {
 } from "./reducers/userReducers";
 
 const reducer = combineReducers({
-  blogList: blogListReducer,
+  allBlog:allBlogReducer,
+  blogRead:blogReadReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   blogCreate: blogCreateReducer,

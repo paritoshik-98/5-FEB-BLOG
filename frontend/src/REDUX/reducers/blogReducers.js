@@ -1,10 +1,24 @@
-export const blogListReducer = (state = { BLOG: [] }, action) => {
+export const allBlogReducer = (state = { BLOG: [] }, action) => {
     switch (action.type) {
-      case 'BLOG_LIST_REQUEST':
+      case 'ALL_BLOG_REQUEST':
         return { loading: true };
-      case 'BLOG_LIST_SUCCESS':
-        return { loading: false, BLOG: action.payload };
-      case 'BLOG_LIST_FAIL':
+      case 'ALL_BLOG_SUCCESS':
+        return { loading: false, blogs: action.payload };
+      case 'ALL_BLOG_FAIL':
+        return { loading: false, error: action.payload };
+  
+      default:
+        return state;
+    }
+  };
+
+  export const blogReadReducer = (state = { BLOG: [] }, action) => {
+    switch (action.type) {
+      case 'BLOG_READ_REQUEST':
+        return { loading: true };
+      case 'BLOG_READ_SUCCESS':
+        return { loading: false, blog: action.payload };
+      case 'BLOG_READ_FAIL':
         return { loading: false, error: action.payload };
   
       default:
